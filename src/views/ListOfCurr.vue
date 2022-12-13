@@ -5,24 +5,18 @@
 
 			<template v-if="tickers.length">
 				<!-- PAGINATION AND FILTER -->
-				<div>
-					<button
-						class="my-4 mx-2 inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-full text-white bg-gray-600 hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-					>
-						Назад
-					</button>
-					<button
-						@click="con()"
-						class="my-4 mx-2 inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-full text-white bg-gray-600 hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-					>
-						Вперед
-					</button>
-					<div>Фильтр: <input /></div>
+				<div class="flex justify-between">
+					<div>Фильтр: <input v-model="filter" /></div>
+
+					<my-select
+						:options="selectValuteOptions"
+						v-model:model-value="selectedValute"
+					/>
 				</div>
 				<hr class="w-full border-t border-gray-600 my-4" />
 
 				<!-- TICKER CARD -->
-				<valute-card :tickers="tickers" />
+				<valute-card :tickers="filteredList()" :base="base" />
 				<hr class="w-full border-t border-gray-600 my-4" />
 			</template>
 		</div>
@@ -30,16 +24,19 @@
 </template>
 
 <script>
-import convert from "../utils/convert";
-
+import MySelect from "../components/MySelect.vue";
 import ValuteCard from "../components/valuteCard.vue";
 export default {
-	components: { ValuteCard },
+	components: { ValuteCard, MySelect },
 
 	data() {
 		return {
 			tickers: [],
-			base: [],
+			base: "",
+			filter: "",
+			page: 1,
+			selectedValute: "",
+			selectValuteOptions: [],
 		};
 	},
 	created() {},
@@ -53,15 +50,14 @@ export default {
 				const data = await f.json();
 				const convertValutesOnArray = Object.entries(data.Valute).map((el) => el[1]);
 				this.tickers = convertValutesOnArray;
-
-				// const growFailFetch = convertValutesOnArray.map((arr) =>
-				// 	arr.Value > arr.Previous ? true : false
-				// );
-				// this.growFail = growFailFetch;
+				this.selectValuteOptions = convertValutesOnArray.map((valute) => ({ valute }));
+				console.log(convertValutesOnArray);
 			}, 5000);
 		},
-		con(num) {
-			convert(num);
+		filteredList() {
+			return this.tickers.filter((ticker) =>
+				ticker.Name.toLowerCase().includes(this.filter)
+			);
 		},
 	},
 

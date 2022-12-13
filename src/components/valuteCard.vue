@@ -1,4 +1,5 @@
 <template>
+	{{ base }}
 	<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
 		<div
 			v-for="(ticker, idx) in tickers"
@@ -7,9 +8,7 @@
 			class="bg-white overflow-hidden shadow rounded-lg border-purple-800 border-solid cursor-pointer"
 		>
 			<div class="px-4 py-5 sm:p-6 text-center">
-				<dt class="text-2xl font-medium truncate">
-					{{ ticker.Name }}
-				</dt>
+				<dt class="text-2xl font-medium truncate">{{ ticker.Name }} - {{ base }}</dt>
 				<dd class="mt-1 text-lg font-semibold text-gray-400">
 					{{ ticker.CharCode }}
 				</dd>
@@ -68,6 +67,7 @@ export default {
 			type: Array,
 			required: true,
 		},
+		base: "RUB",
 	},
 	methods: {
 		differenceValute(val) {
