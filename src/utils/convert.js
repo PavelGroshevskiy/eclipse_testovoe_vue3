@@ -8,20 +8,4 @@ async () => {
 	const data = await f.json();
 	const convertValutesOnArray = Object.entries(data.Valute).map((el) => el[1]);
 	this.tickers = convertValutesOnArray;
-
-	// const growFailFetch = convertValutesOnArray.map((arr) =>
-	// 	arr.Value > arr.Previous ? true : false
-	// );
-	// this.growFail = growFailFetch;
-};
-("https://openexchangerates.org/api/latest.json");
-
-export default (num) => {
-	fx.base = "USD";
-	fx.settings = { from: "USD", to: "GBP" };
-	fx.convert(1000); // 647.71034
-
-	// With options:
-	fx.convert(1000, { to: "HKD" }); // 7781.91949 (default `from` currency)
-	fx.convert(1000, { from: "GBP", to: "HKD" }); // 12014.50549
 };

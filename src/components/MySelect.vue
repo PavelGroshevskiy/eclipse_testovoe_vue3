@@ -1,6 +1,6 @@
 <template>
-	<select :value="modelValue" @change="changeOption">
-		<option selected value="">Российский рубль</option>
+	<select :value="modelValue" @change="changeOption" @click="changeOption">
+		<option value="RUB">Российский рубль</option>
 		<option v-for="option in options" :key="option" :value="option.valute.CharCode">
 			{{ option.valute.Name }}
 		</option>

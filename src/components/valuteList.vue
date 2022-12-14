@@ -1,5 +1,4 @@
 <template>
-	{{ base }}
 	<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
 		<div
 			v-for="(ticker, idx) in tickers"
@@ -8,15 +7,17 @@
 			class="bg-white overflow-hidden shadow rounded-lg border-purple-800 border-solid cursor-pointer"
 		>
 			<div class="px-4 py-5 sm:p-6 text-center">
-				<dt class="text-2xl font-medium truncate">{{ ticker.Name }} - {{ base }}</dt>
+				<dt class="text-2xl font-medium truncate">{{ ticker.Name }}</dt>
 				<dd class="mt-1 text-lg font-semibold text-gray-400">
 					{{ ticker.CharCode }}
 				</dd>
 				<dd class="mr-auto mt-1 text-3xl font-semibold text-gray-900">
+					<!-- {{ (ticker.Nominal / ticker.Value).toFixed(3) }} -->
 					{{ ticker.Value.toFixed(2) }}
-
-					<!-- v-for="(bool, idx) in growFailArray" :key="idx" -->
-					<span class="inline-block" @click="dif()">
+					<!-- <div>
+						{{ ticker.Nominal }}
+					</div> -->
+					<span class="inline-block">
 						<svg
 							v-if="ticker.Value < ticker.Previous"
 							xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +51,9 @@
 						</svg>
 					</span>
 
-					<span class="text-lg align-middle">{{ differenceValute(ticker) }}</span>
+					<span v-if="ticker.Previous" class="text-lg align-middle">{{
+						differenceValute(ticker)
+					}}</span>
 				</dd>
 			</div>
 		</div>
