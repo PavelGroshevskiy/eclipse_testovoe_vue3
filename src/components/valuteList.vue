@@ -70,7 +70,6 @@ export default {
 			type: Array,
 			required: true,
 		},
-		base: "RUB",
 	},
 	methods: {
 		differenceValute(val) {
