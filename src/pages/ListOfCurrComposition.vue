@@ -7,23 +7,14 @@
 				Обновить списки валют
 			</button>
 
-			<!-- PAGINATION AND FILTER -->
 			<div class="flex justify-between">
 				<div>
 					Фильтр:
 					<my-input v-model="filter" />
 				</div>
-
-				<!-- <my-select
-					:options="valuteOptions"
-					:model-value="selectedValute"
-					@update:model-value="setSelect"
-					@change="convertValute"
-				/> -->
 			</div>
 			<hr class="w-full border-t border-gray-600 my-4" />
 
-			<!-- TICKER CARD -->
 			<valute-list v-if="!isValuteLoading" :tickers="filteredValutes" />
 			<div v-else>Loading...</div>
 			<hr class="w-full border-t border-gray-600 my-4" />
