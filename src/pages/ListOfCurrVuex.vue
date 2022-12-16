@@ -1,5 +1,5 @@
 <template>
-	<div class="container mx-auto flex flex-col items-center bg-gray-100 p-4">
+	<div class="container mx-auto flex flex-col items-center bg-gray-100 p-4 mt-5">
 		<div class="container">
 			<button
 				@click="fetchValutes"
@@ -34,10 +34,9 @@
 
 <script>
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
-import MySelect from "../components/MySelect.vue";
+import MySelect from "../components/UI/MySelect.vue";
 import ValuteList from "../components/valuteList.vue";
 import MyInput from "../components/UI/MyInput.vue";
-import { convert } from "../utils/convert.js";
 
 export default {
 	components: { ValuteList, MySelect, MyInput },
@@ -56,32 +55,6 @@ export default {
 			setFilter: "valute/setFilter",
 			setSelect: "valute/setSelect",
 		}),
-
-		// changeCourse() {
-		// 	try {
-		// 		const findTickerOnSelect = this.valutes.find(
-		// 			(item) => item.CharCode === this.selectedValute
-		// 		);
-		// 		const findTickerOnSelectValue = findTickerOnSelect.Value;
-		// 		console.log(findTickerOnSelectValue);
-
-		// 		// CHANGE VALUTERATES ON SELECT
-		// 		const changedRate = this.valutes.map((el) => {
-		// 			const curse = el.Value / el.Nominal;
-		// 			const Value =
-		// 				el.Nominal > 1
-		// 					? findTickerOnSelectValue / curse
-		// 					: findTickerOnSelectValue / el.Value;
-		// 			const CharCode = el.CharCode;
-		// 			const Name = el.Name;
-
-		// 			return { Name: Name, CharCode: CharCode, Value: Value, Nominal: el.Nominal };
-		// 		});
-		// 		this.valutes = changedRate;
-		// 	} catch (e) {
-		// 		console.log(e);
-		// 	}
-		// },
 	},
 
 	computed: {
@@ -91,6 +64,7 @@ export default {
 			filter: (state) => state.valute.filter,
 			selectedValute: (state) => state.valute.selectedValute,
 			isValuteLoading: (state) => state.valute.isValuteLoading,
+			convertedValutes: (state) => state.valute.convertedValutes,
 		}),
 
 		...mapGetters({

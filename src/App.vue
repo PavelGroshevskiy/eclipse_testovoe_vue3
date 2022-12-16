@@ -1,9 +1,17 @@
 <template>
-	<div id="nav">
-		<router-link to="/">ListOfCurr</router-link> |
-		<router-link to="/about">About</router-link>
-	</div>
+	<navbar></navbar>
+
 	<router-view />
 </template>
+
+<script>
+import Navbar from "./components/Navbar.vue";
+
+export default {
+	components: {
+		Navbar,
+	},
+};
+</script>
 
 <style lang="scss"></style>

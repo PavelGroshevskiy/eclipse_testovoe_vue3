@@ -27,23 +27,3 @@ export const convert = (base, rates, nominal) => {
 	console.log(fx(100).from("USD").to("GBP"));
 	// return (convertValute = fx(nominal).from("USD").to("GBP"));
 };
-
-export const convertO = (commit, state) => {
-	const findTickerOnSelect = state.valutes.find(
-		(item) => item.CharCode === state.selectedValute
-	);
-	const findTickerOnSelectValue = findTickerOnSelect.Value;
-
-	// REBILD THE OBJECT OF VALUTES AND SEND ON STATE
-	const changedRate = state.valutes.map((el) => {
-		const curse = el.Value / el.Nominal;
-		const Value =
-			el.Nominal > 1
-				? findTickerOnSelectValue / curse
-				: findTickerOnSelectValue / el.Value;
-		const CharCode = el.CharCode;
-		const Name = el.Name;
-		return { Name: Name, CharCode: CharCode, Value: Value, Nominal: el.Nominal };
-	});
-	commit("setValutes", changedRate);
-};

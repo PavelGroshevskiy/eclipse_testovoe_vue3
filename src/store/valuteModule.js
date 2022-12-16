@@ -1,4 +1,5 @@
-import { convert } from "money";
+import { loadValutesData } from "../utils/api";
+import { ELEMENT_OF_VALUTE_ARRAY } from "../utils/constants";
 
 export const valuteModule = {
 	state: () => ({
@@ -35,21 +36,17 @@ export const valuteModule = {
 		setSelect(state, select) {
 			state.selectedValute = select;
 		},
-		setValutesConvert(state, valute) {
-			state.valutes = valute;
-		},
 	},
 
 	actions: {
-		convertValute({ commit, state }) {
+		convertValute({ commit, state, dispatch }) {
 			try {
 				//FIND VALUTES ON ARRAY
-				const findTickerOnSelect = state.valutes.find(
-					(item) => item.CharCode === state.selectedValute
-				);
+				const findTickerOnSelect =
+					state.valutes.find((item) => item.CharCode === state.selectedValute) ??
+					dispatch("fetchValutes");
 				const findTickerOnSelectValue = findTickerOnSelect.Value;
-
-				// REBILD THE OBJECT OF VALUTES AND SEND ON STATE
+				// REBILD THE OBJECT OF VALUTES FOR CONVERTING AND SEND ON STATE
 				const changedRate = state.valutes.map((el) => {
 					const curse = el.Value / el.Nominal;
 					const Value =
@@ -65,22 +62,23 @@ export const valuteModule = {
 				console.log(e);
 			}
 		},
+
 		// FETCHING VALUTE DATA
-		fetchValutes({ commit, state }) {
+		async fetchValutes({ commit, state }) {
 			try {
 				commit("setLoading", true);
-				setTimeout(async () => {
-					const f = await fetch("https://www.cbr-xml-daily.ru/daily_json.js");
-					const data = await f.json();
-					const convertValutesOnArray = Object.entries(data.Valute).map((el) => el[1]);
-					commit("setValutes", convertValutesOnArray);
-					commit(
-						"setValuteOptions",
-						convertValutesOnArray.map((valute) => ({ valute }))
-					);
-					commit("setLoading", false);
-					commit((state.selectedValute = "RUB"));
-				}, 1000);
+				const dataValutes = await loadValutesData();
+				const convertValutesOnArray = Object.entries(dataValutes.Valute).map(
+					(el) => el[ELEMENT_OF_VALUTE_ARRAY]
+				);
+
+				commit("setValutes", convertValutesOnArray);
+				commit(
+					"setValuteOptions",
+					convertValutesOnArray.map((valute) => ({ valute }))
+				);
+				commit("setLoading", false);
+				commit((state.selectedValute = "RUB"));
 			} catch (e) {
 				console.log(e);
 			}
