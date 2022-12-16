@@ -9,9 +9,10 @@ export const useConverting = (valutes) => {
 	const formatedValutes = ref([]);
 
 	const fetching = async () => {
-		formatedValutes.value = await fetch("https://www.cbr-xml-daily.ru/").then((data) =>
-			data.json().then(console.log())
+		formatedValutes.value = await fetch("https://www.cbr-xml-daily.ru/latest.js").then(
+			(data) => data.json().then(console.log())
 		);
+		console.log(formatedValutes.value);
 	};
 
 	const convert = computed((base, rates, nominal) => {
