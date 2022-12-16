@@ -1,11 +1,13 @@
 <template>
 	<div class="container mx-auto flex flex-col items-center bg-gray-100 p-4 mt-5">
 		<div class="container">
-			<button
+			{{ convert }}
+			{{ formatedValutes }}
+			<!-- <button
 				class="my-4 mb-8 mx-2 inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-full text-white bg-gray-600 hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
 			>
 				Обновить списки валют
-			</button>
+			</button> -->
 
 			<div class="flex justify-between">
 				<div>
@@ -28,6 +30,7 @@ import ValuteList from "../components/valuteList.vue";
 import MyInput from "../components/UI/MyInput.vue";
 import { useValutes } from "../hooks/useValutes.js";
 import { useFilteredValutes } from "../hooks/useFilteredValutes.js";
+import { useConverting } from "../hooks/useConverting.js";
 
 export default {
 	components: { ValuteList, MySelect, MyInput },
@@ -38,6 +41,7 @@ export default {
 	setup() {
 		const { isValuteLoading, valutes, valuteOptions } = useValutes();
 		const { filteredValutes, filter } = useFilteredValutes(valutes);
+		const { convertValute, convert, formatedValutes } = useConverting(valutes);
 
 		return {
 			isValuteLoading,
@@ -45,6 +49,9 @@ export default {
 			valuteOptions,
 			filteredValutes,
 			filter,
+			convertValute,
+			convert,
+			formatedValutes,
 		};
 	},
 };
