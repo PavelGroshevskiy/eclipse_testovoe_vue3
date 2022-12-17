@@ -1,15 +1,17 @@
 <template>
-	<div class="container mx-auto flex flex-col items-center bg-gray-100 p-4">
+	<div class="mt-10 container mx-auto flex flex-col items-center bg-gray-100 p-4">
 		<div class="container">
 			<div class="flex justify-between">
-				<div>
-					<my-input :model-value="filter" @update:model-value="setFilter" />
-				</div>
+				<my-select />
+				<my-input />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-export default {};
+import MySelect from "../components/UI/MySelect.vue";
+export default {
+	components: { MySelect },
+};
 </script>

@@ -2,45 +2,31 @@
 // 	const f = await fetch("https://openexchangerates.org/api/latest.json");
 
 var fx = require("money");
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, reactive } from "vue";
 
 export const useConverting = (valutes) => {
 	const convertingValutes = ref([]);
 	const formatedValutes = ref([]);
+	const f = reactive({});
 
+	console.log(f);
 	const fetching = async () => {
-		formatedValutes.value = await fetch("https://www.cbr-xml-daily.ru/latest.js").then(
-			(data) => data.json().then(console.log())
+		const dataFormatValues = await fetch("https://www.cbr-xml-daily.ru/latest.js").then(
+			(data) => data.json()
 		);
-		console.log(formatedValutes.value);
+
+		fx.base = dataFormatValues.base;
+		fx.rates = dataFormatValues.rates;
+
+		//
 	};
 
 	const convert = computed((base, rates, nominal) => {
-		fx.base = "USD";
-		fx.rates = {
-			EUR: 0.745101, // eg. 1 USD === 0.745101 EUR
-			GBP: 0.64771, // etc...
-			HKD: 7.781919,
-			USD: 1, // always include the base rate (1:1)
-		};
+		debugger;
 
 		// Check money.js has finished loading:
-		if (typeof fx !== "undefined" && fx.rates) {
-			fx.rates;
-			fx.base;
-		} else {
-			// If not, apply to fxSetup global:
-			const fxSetup = {
-				rates: fx.rates,
-				base: fx.base,
-				nominal: nominal,
-			};
-		}
-		// console.log(fx(100).from("USD").to("GBP"));
-		// console.log(valutes.value);
-		console.log(formatedValutes);
-
-		// return (convertValute = fx(nominal).from("USD").to("GBP"));
+		console.log(fx(100).from("USD").to("GBP"));
+		// console.log(fx.base);
 	});
 
 	onMounted(fetching);

@@ -5,6 +5,7 @@
 			<my-button @click="$router.push('/composition')"
 				>Список Валют (Composition)</my-button
 			>
+			<my-button @click="$router.push('/converter')">Конвертер </my-button>
 		</div>
 	</div>
 </template>
