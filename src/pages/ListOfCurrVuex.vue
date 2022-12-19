@@ -35,7 +35,7 @@
 <script>
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 import MySelect from "../components/UI/MySelect.vue";
-import ValuteList from "../components/valuteList.vue";
+import ValuteList from "../components/ValuteList.vue";
 import MyInput from "../components/UI/MyInput.vue";
 
 export default {

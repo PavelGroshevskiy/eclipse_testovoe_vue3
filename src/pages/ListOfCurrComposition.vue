@@ -26,7 +26,7 @@
 
 <script>
 import MySelect from "../components/UI/MySelect.vue";
-import ValuteList from "../components/valuteList.vue";
+import ValuteList from "../components/ValuteList.vue";
 import MyInput from "../components/UI/MyInput.vue";
 import { useValutes } from "../hooks/useValutes.js";
 import { useFilteredValutes } from "../hooks/useFilteredValutes.js";

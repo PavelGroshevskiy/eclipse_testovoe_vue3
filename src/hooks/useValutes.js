@@ -13,6 +13,14 @@ export function useValutes() {
 			const convertValutesOnArray = Object.entries(dataValutes.Valute).map(
 				(el) => el[ELEMENT_OF_VALUTE_ARRAY]
 			);
+
+			convertValutesOnArray.push({
+				CharCode: "AUD",
+				Name: "Российский рубль",
+				Nominal: 1,
+				Value: 1,
+			});
+
 			valutes.value = convertValutesOnArray;
 			valuteOptions.value = convertValutesOnArray.map((valute) => ({ valute }));
 			isValuteLoading.value = false;

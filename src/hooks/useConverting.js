@@ -2,34 +2,19 @@
 // 	const f = await fetch("https://openexchangerates.org/api/latest.json");
 
 var fx = require("money");
-import { ref, computed, onMounted, reactive } from "vue";
 
-export const useConverting = (valutes) => {
+import { ref, computed, onMounted, reactive } from "vue";
+import { useValutesWithBase } from "./useValutesWithBase";
+
+export const useConverting = () => {
 	const convertingValutes = ref([]);
 	const formatedValutes = ref([]);
-	const f = reactive({});
 
-	console.log(f);
-	const fetching = async () => {
-		const dataFormatValues = await fetch("https://www.cbr-xml-daily.ru/latest.js").then(
-			(data) => data.json()
-		);
+	const { valutesWithBase, isValuteLoading } = useValutesWithBase();
 
-		fx.base = dataFormatValues.base;
-		fx.rates = dataFormatValues.rates;
+	// console.log(valutesWithBase);
 
-		//
-	};
+	const convert = computed((base, rates, nominal) => {});
 
-	const convert = computed((base, rates, nominal) => {
-		debugger;
-
-		// Check money.js has finished loading:
-		console.log(fx(100).from("USD").to("GBP"));
-		// console.log(fx.base);
-	});
-
-	onMounted(fetching);
-
-	return { convertingValutes, convert, formatedValutes };
+	return { convert };
 };

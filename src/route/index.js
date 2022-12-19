@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ListOfCurrVuex from "../pages/ListOfCurrVuex.vue";
 import ListOfCurrComposition from "../pages/ListOfCurrComposition.vue";
+import ConverterComposApi from "../pages/ConverterComposApi.vue";
 import Converter from "../pages/Converter.vue";
 
 const routes = [
@@ -11,6 +12,10 @@ const routes = [
 	{
 		path: "/composition",
 		component: ListOfCurrComposition,
+	},
+	{
+		path: "/converterapi",
+		component: ConverterComposApi,
 	},
 	{
 		path: "/converter",

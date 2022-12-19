@@ -6,6 +6,9 @@
 				>Список Валют (Composition)</my-button
 			>
 			<my-button @click="$router.push('/converter')">Конвертер </my-button>
+			<my-button @click="$router.push('/converterapi')"
+				>Конвертер (Composition)
+			</my-button>
 		</div>
 	</div>
 </template>
