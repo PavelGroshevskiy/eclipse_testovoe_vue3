@@ -1,8 +1,6 @@
 <template>
 	<div class="mt-10 container mx-auto flex flex-col items-center bg-gray-100 p-4">
 		<div class="container">
-			<pre></pre>
-
 			<div class="flex justify-around">
 				<div>
 					<select name="">
