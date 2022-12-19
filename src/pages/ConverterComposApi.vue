@@ -9,7 +9,7 @@
 
 			<div class="flex justify-around">
 				<div>
-					<select v-model="valutesWithBase.CharCode" name="">
+					<select name="">
 						<option
 							v-for="valute in valutesWithBase"
 							:key="valute.CharCode"
@@ -25,8 +25,14 @@
 				</div>
 
 				<div>
-					<select name="sel" id="">
-						<option value="2">2222</option>
+					<select name="" id="">
+						<option
+							v-for="valute in valutesWithBase"
+							:key="valute.CharCode"
+							:value="valute.Value"
+						>
+							{{ valute.CharCode }}
+						</option>
 					</select>
 					<div class="inline-block">
 						<label class="m-6" for="secondValute">SecondCoinNominal</label>
