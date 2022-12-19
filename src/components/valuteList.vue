@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import valuteItem from "./ValuteItem.vue";
+import valuteItem from "./valuteItem.vue";
 import MyButton from "./UI/MyButton.vue";
 
 export default {

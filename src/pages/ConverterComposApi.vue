@@ -1,11 +1,7 @@
 <template>
 	<div class="mt-10 container mx-auto flex flex-col items-center bg-gray-100 p-4">
 		<div class="container">
-			<pre>
-				{{ con }}
-
-			</pre
-			>
+			<pre></pre>
 
 			<div class="flex justify-around">
 				<div>
@@ -22,6 +18,11 @@
 						<label class="m-6" for="firstValute">FirstCoinNominal</label>
 						<input type="text" id="firstValute" />
 					</div>
+					<valute-item
+						v-for="ticker in valutesWithBase"
+						:key="ticker.CharCode"
+						:ticker="ticker"
+					/>
 				</div>
 
 				<div>
@@ -33,11 +34,17 @@
 						>
 							{{ valute.CharCode }}
 						</option>
+						<span>{{}}</span>
 					</select>
 					<div class="inline-block">
 						<label class="m-6" for="secondValute">SecondCoinNominal</label>
 						<input type="text" id="secondValute" />
 					</div>
+					<valute-item
+						v-for="ticker in valutesWithBase"
+						:key="ticker.CharCode"
+						:ticker="ticker"
+					/>
 				</div>
 			</div>
 			<!-- <valute-list :tickers="valutesWithBase" /> -->
@@ -46,16 +53,13 @@
 </template>
 
 <script>
-import { computed } from "@vue/runtime-core";
+import ValuteItem from "../components/valuteItem.vue";
 import { useConvert } from "../hooks/useConvert";
 import { useValutesWithBase } from "../hooks/useValutesWithBase";
 
 export default {
-	props: {
-		dd: String,
-	},
-
-	setup(props) {
+	components: { ValuteItem },
+	setup() {
 		// const { convert } = useConverting();
 		const { valutesWithBase } = useValutesWithBase();
 		const { filteredValutes } = useConvert();
@@ -63,10 +67,10 @@ export default {
 		const con = useConvert({
 			valuteFirst: {
 				valuteOptions: ["sad", "fdgf"],
+				option: "",
 				ticker: { 1: "first" },
-				nominal: "100",
 			},
-			valuteSecond: { valuteOptions: filteredValutes, ticker: {}, nominal: "" },
+			valuteSecond: { valuteOptions: [], ticker: {} },
 		});
 
 		// console.log(convert);

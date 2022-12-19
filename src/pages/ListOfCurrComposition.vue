@@ -26,11 +26,10 @@
 
 <script>
 import MySelect from "../components/UI/MySelect.vue";
-import ValuteList from "../components/ValuteList.vue";
+import ValuteList from "../components/valuteList.vue";
 import MyInput from "../components/UI/MyInput.vue";
 import { useValutes } from "../hooks/useValutes.js";
 import { useFilteredValutes } from "../hooks/useFilteredValutes.js";
-import { useConverting } from "../hooks/useConverting.js";
 
 export default {
 	components: { ValuteList, MySelect, MyInput },
@@ -41,7 +40,6 @@ export default {
 	setup() {
 		const { isValuteLoading, valutes, valuteOptions } = useValutes();
 		const { filteredValutes, filter } = useFilteredValutes(valutes);
-		const { convertValute, convert, formatedValutes } = useConverting(valutes);
 
 		return {
 			isValuteLoading,
@@ -49,9 +47,6 @@ export default {
 			valuteOptions,
 			filteredValutes,
 			filter,
-			convertValute,
-			convert,
-			formatedValutes,
 		};
 	},
 };

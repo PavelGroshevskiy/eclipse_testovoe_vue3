@@ -10,7 +10,7 @@ export const useConvert = (init = {}) => {
 		return valutesWithBase.value.filter((valute) => valute.CharCode.includes("AMD"));
 	});
 
-	console.log(filteredValutes);
+	console.log(init);
 
 	for (let [key, value] of Object.entries(init)) {
 		// init[key] = valutesWithBase.value;
