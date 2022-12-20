@@ -1,9 +1,14 @@
 <template>
 	<div class="mt-10 container mx-auto flex flex-col items-center bg-gray-100 p-4">
 		<div class="container">
+			<pre>
+				{{ selectQuery }}
+				
+			</pre
+			>
 			<div class="flex justify-around">
 				<div>
-					<select name="">
+					<select v-model="selectQuery">
 						<option
 							v-for="valute in valutesWithBase"
 							:key="valute.CharCode"
@@ -17,14 +22,17 @@
 						<input type="text" id="firstValute" />
 					</div>
 					<valute-item
-						v-for="ticker in valutesWithBase"
+						class="m-3"
+						v-for="ticker in selectedValute"
 						:key="ticker.CharCode"
 						:ticker="ticker"
 					/>
 				</div>
 
+				<pre>{{}}</pre>
+
 				<div>
-					<select name="" id="">
+					<select>
 						<option
 							v-for="valute in valutesWithBase"
 							:key="valute.CharCode"
@@ -32,13 +40,14 @@
 						>
 							{{ valute.CharCode }}
 						</option>
-						<span>{{}}</span>
 					</select>
 					<div class="inline-block">
 						<label class="m-6" for="secondValute">SecondCoinNominal</label>
 						<input type="text" id="secondValute" />
 					</div>
+
 					<valute-item
+						class="m-3"
 						v-for="ticker in valutesWithBase"
 						:key="ticker.CharCode"
 						:ticker="ticker"
@@ -52,31 +61,26 @@
 
 <script>
 import ValuteItem from "../components/valuteItem.vue";
-import { useConvert } from "../hooks/useConvert";
+
 import { useValutesWithBase } from "../hooks/useValutesWithBase";
+import { useSelected } from "../hooks/useSelected";
 
 export default {
 	components: { ValuteItem },
+
+	data() {
+		return {};
+	},
+
 	setup() {
-		// const { convert } = useConverting();
 		const { valutesWithBase } = useValutesWithBase();
-		const { filteredValutes } = useConvert();
-
-		const con = useConvert({
-			valuteFirst: {
-				valuteOptions: ["sad", "fdgf"],
-				option: "",
-				ticker: { 1: "first" },
-			},
-			valuteSecond: { valuteOptions: [], ticker: {} },
-		});
-
-		// console.log(convert);
-		// console.log(fx(100).from("USD").to("RUB"));
+		const { selectQuery, selectedValute } = useSelected(valutesWithBase);
+		const { secondSelectQuery, secondSelectedValute } = useSelected(valutesWithBase);
 
 		return {
-			con,
 			valutesWithBase,
+			selectQuery,
+			selectedValute,
 		};
 	},
 };
